@@ -22,14 +22,14 @@ android {
             applicationId 'com.udacity.gradle.builditbigger.free'
         }
         paid {
-            applicationId 'com.udacity.gradle.builditbigger.free'
+            applicationId 'com.udacity.gradle.builditbigger.paid'
         }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    // Added for AdMob
+    
     compile project(':androidjokes')
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:25.0.0'

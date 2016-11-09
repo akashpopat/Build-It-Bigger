@@ -3,6 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.test.AndroidTestCase;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by akash on 11/8/16.
@@ -12,20 +13,13 @@ public class JokeTest extends AndroidTestCase {
 
     private String joke = null;
 
-    public void testGetJoke() {
+    public JokeTest() {
         EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
         asyncTask.execute(mContext);
         try {
-            joke = asyncTask.get();
-        } catch (InterruptedException e) {
-            joke = null;
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            joke = null;
-            e.printStackTrace();
+            joke = asyncTask.get(30, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            fail("Timed Out");
         }
-        assertNull(joke);
     }
-
-
 }
